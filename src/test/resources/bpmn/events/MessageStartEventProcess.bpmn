@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_091da54" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.35.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0">
+  <bpmn:process id="Process_MessageStartEventProcess" name="MessageStartEventProcess" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_0q0sloj" sourceRef="StartEvent_MessageStartEvent" targetRef="Activity_doService" />
+    <bpmn:endEvent id="Event_End" name="End">
+      <bpmn:incoming>Flow_12ytzeo</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_12ytzeo" sourceRef="Activity_doService" targetRef="Event_End" />
+    <bpmn:startEvent id="StartEvent_MessageStartEvent" name="Message Start Event">
+      <bpmn:outgoing>Flow_0q0sloj</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_00o7tmt" messageRef="Message_29ckra4" />
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_doService" name="do service">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="doService" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0q0sloj</bpmn:incoming>
+      <bpmn:outgoing>Flow_12ytzeo</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmn:message id="Message_29ckra4" name="Message_StartEvent" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_MessageStartEventProcess">
+      <bpmndi:BPMNShape id="Event_08nvujl_di" bpmnElement="Event_End">
+        <dc:Bounds x="422" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="430" y="145" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0lk5au7_di" bpmnElement="StartEvent_MessageStartEvent">
+        <dc:Bounds x="182" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="164" y="145" width="72" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vkukin_di" bpmnElement="Activity_doService">
+        <dc:Bounds x="270" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0q0sloj_di" bpmnElement="Flow_0q0sloj">
+        <di:waypoint x="218" y="120" />
+        <di:waypoint x="270" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12ytzeo_di" bpmnElement="Flow_12ytzeo">
+        <di:waypoint x="370" y="120" />
+        <di:waypoint x="422" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

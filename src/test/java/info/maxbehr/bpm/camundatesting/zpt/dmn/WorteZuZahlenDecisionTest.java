@@ -1,6 +1,6 @@
-package info.maxbehr.bpm.camundatesting.dmn;
+package info.maxbehr.bpm.camundatesting.zpt.dmn;
 
-import info.maxbehr.bpm.camundatesting.helper.ProcessTestHelper;
+import info.maxbehr.bpm.camundatesting.zpt.helper.ProcessTestHelper;
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.process.test.api.ZeebeTestEngine;
 import io.camunda.zeebe.process.test.extension.ZeebeProcessTest;

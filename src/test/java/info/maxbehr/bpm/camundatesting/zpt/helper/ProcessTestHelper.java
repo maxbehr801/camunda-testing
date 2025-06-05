@@ -1,4 +1,4 @@
-package info.maxbehr.bpm.camundatesting.helper;
+package info.maxbehr.bpm.camundatesting.zpt.helper;
 
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.ActivateJobsResponse;
