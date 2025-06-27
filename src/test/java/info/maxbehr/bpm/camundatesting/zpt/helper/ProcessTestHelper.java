@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -42,6 +43,26 @@ public class ProcessTestHelper {
                 .send()
                 .join();
         waitForIdleState(Duration.ofSeconds(1));
+    }
+
+    /**
+     * Wichtige Hinweise:
+     * Die Job Worker-Implementierung für User Tasks ist veraltet (deprecated). Camunda empfiehlt, stattdessen die neue "Camunda User Task"-Implementierung zu verwenden, da diese mehr Features und eine bessere API bietet [Job worker implementation].
+     * Mit Camunda User Tasks (ab Version 8.6/8.7) werden User Tasks direkt von der Engine verwaltet und nicht mehr als Jobs behandelt. Die Verwaltung und das Abschließen erfolgt dann über die Camunda 8 API, nicht mehr über Job Worker [Migrate to Camunda user tasks].
+     * Zusammengefasst:
+     * io.camunda.zeebe:userTask ist der Job-Typ für klassische, Job Worker-basierte User Tasks in Camunda 8. Für neue Projekte solltest du aber die Camunda User Task-Implementierung nutzen, da die Job Worker-Variante bald entfernt wird [User tasks].
+     */
+    public void completeUserTask() {
+        List<ActivatedJob> jobs = client.newActivateJobsCommand()
+                .jobType("io.camunda.zeebe:userTask")
+                .maxJobsToActivate(1)
+                .send()
+                .join()
+                .getJobs();
+        ActivatedJob job = jobs.get(0);
+        client.newCompleteCommand(job.getKey())
+                .send()
+                .join();
     }
 
     public void waitForIdleState() {
